@@ -44,8 +44,7 @@ Before you begin, ensure you have the following installed on your computer:
 ### Step 1: Clone the Repository
 Open your terminal (or Command Prompt) and run:
 ```bash
-git clone <your-github-repo-url>
-cd hrms-project
+git clone https://github.com/TejasJL/Human-Resource-Management-System
 ```
 
 ### Step 2: Install Dependencies
@@ -93,55 +92,6 @@ This collection includes all authentication, employee, leave, attendance, and pa
 
 ---
 
-## 📤 How to Push to GitHub (For Beginners)
-
-If you haven't uploaded this project to GitHub yet, follow these exact steps:
-
-1. **Create a new repository on GitHub:**
-   - Go to [GitHub.com](https://github.com/) and log in.
-   - Click the **"+"** icon in the top right and select **"New repository"**.
-   - Name your repository (e.g., `hrms-project`), leave it Public or Private, and click **"Create repository"**. (Do NOT initialize with a README, .gitignore, or license).
-
-2. **Run these commands in your project terminal:**
-   Open your terminal inside your project folder and run these commands one by one:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit - HRMS Project"
-   git branch -M main
-   git remote add origin <PASTE_YOUR_GITHUB_REPO_URL_HERE>
-   git push -u origin main
-   ```
-   *Your code is now live on GitHub!*
-
----
-
-## ☁️ Deployment Guide (Render.com)
-
-Deploying this MERN stack application to [Render](https://render.com/) is completely free and very easy.
-
-### Step 1: Prepare for Deployment
-Ensure your code is already pushed to your GitHub repository (using the steps above).
-
-### Step 2: Deploy the Web Service
-1. Go to [Render.com](https://render.com/) and sign up using your GitHub account.
-2. Click on **"New +"** and select **"Web Service"**.
-3. Connect your GitHub account and select your `hrms-project` repository.
-4. Fill in the following details:
-   - **Name:** `hrms-app` (or whatever you like)
-   - **Environment:** `Node`
-   - **Build Command:** `npm install && npm run build`
-   - **Start Command:** `npm start` (Ensure your `package.json` has `"start": "node server.js"`)
-5. Scroll down to **Environment Variables** and add the following:
-   - `MONGODB_URI` : *(Paste your MongoDB Atlas connection string here)*
-   - `JWT_SECRET` : `super_secret_key_123`
-   - `NODE_ENV` : `production`
-6. Click **"Create Web Service"**.
-
-*Render will now build and deploy your app. This may take 5-10 minutes. Once finished, Render will give you a live URL (e.g., `https://hrms-app.onrender.com`) where your app is publicly accessible!*
-
----
-
 ## 🤝 Contribution
 
-*Built with ❤️ using the MERN Stack.*
+*Built with ❤️ using the MERN Stack By Tejas*
