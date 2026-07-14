@@ -161,8 +161,8 @@ export default function Attendance() {
                     <tr key={record._id} className="hover:bg-gray-50/50 transition-colors">
                       {isAdmin && (
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{record.employeeId?.fullName}</div>
-                          <div className="text-xs text-gray-500">{record.employeeId?.employeeId}</div>
+                          <div className="text-sm font-medium text-gray-900">{record.employeeId?.fullName || <span className="text-gray-400 italic">Deleted Employee</span>}</div>
+                          <div className="text-xs text-gray-500">{record.employeeId?.employeeId || '-'}</div>
                         </td>
                       )}
                       <td className="px-6 py-4 whitespace-nowrap">

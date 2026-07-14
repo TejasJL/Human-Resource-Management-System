@@ -173,8 +173,8 @@ export default function Leaves() {
                   <tr key={leave._id} className="hover:bg-gray-50/50 transition-colors">
                     {isAdmin && (
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{leave.employeeId?.fullName}</div>
-                        <div className="text-xs text-gray-500">{leave.employeeId?.employeeId}</div>
+                        <div className="text-sm font-medium text-gray-900">{leave.employeeId?.fullName || <span className="text-gray-400 italic">Deleted Employee</span>}</div>
+                        <div className="text-xs text-gray-500">{leave.employeeId?.employeeId || '-'}</div>
                       </td>
                     )}
                     <td className="px-6 py-4 whitespace-nowrap">
