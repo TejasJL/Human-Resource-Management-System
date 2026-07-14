@@ -1,6 +1,6 @@
 # FocusFlow - Human Resource Management System (HRMS)
+<img width="1886" height="862" alt="image" src="https://github.com/user-attachments/assets/a00272d7-cc36-4be0-8cf4-b33500564de5" />
 
-![HRMS Banner](https://via.placeholder.com/1200x300/0F172A/FFFFFF?text=FocusFlow+HRMS)
 
 FocusFlow is a robust, production-ready Human Resource Management System (HRMS) built on the MERN stack (MongoDB, Express.js, React, Node.js). It is designed to streamline employee management, time tracking, leave requests, and automated payroll processing.
 
@@ -9,17 +9,28 @@ FocusFlow is a robust, production-ready Human Resource Management System (HRMS) 
 ## 🌟 Key Features
 
 ### 👤 For Employees
+<img width="1811" height="846" alt="image" src="https://github.com/user-attachments/assets/3465b8c9-817a-486e-855c-ea85f547eb0d" />
+
+
 - **Dashboard:** View real-time attendance, working hours, and leave balances.
 - **Time & Attendance:** Punch in/out with automatic tracking of working hours and late marks.
 - **Leave Management:** Submit leave requests (Full day, Half day, Sick, Casual, Paid, Unpaid).
 - **Payroll:** View and download beautifully formatted PDF Salary Slips.
 
+
+
 ### 👑 For Administrators
+<img width="1847" height="803" alt="image" src="https://github.com/user-attachments/assets/2ec78c30-3bd5-4644-99f0-6a950cb4a29a" />
+
+
+
 - **Employee Management:** Create, read, update, and deactivate employee profiles. Assign customized roles, employment types, and salaries.
 - **Leave Approvals:** Review and approve/reject employee time-off requests.
 - **Attendance Monitoring:** View company-wide punch records and generate monthly attendance reports.
 - **Automated Payroll:** Automatically process monthly payrolls based on attendance, applying leave adjustment rules (e.g., auto-deducting available Paid Leaves for absent days) and calculating salary deductions.
 - **Holiday & Policy Configuration:** Define organizational holidays and configure custom employment types with specific leave policies.
+  
+
 
 ---
 
