@@ -158,3 +158,13 @@ export const getMySalarySlips = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
+export const deletePayroll = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Payroll.findByIdAndDelete(id);
+    res.status(200).json({ message: "Payroll record deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

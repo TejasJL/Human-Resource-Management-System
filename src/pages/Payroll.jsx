@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Briefcase, Download, PlayCircle, DollarSign } from 'lucide-react';
+import { Briefcase, Download, PlayCircle, DollarSign, Trash2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { format } from 'date-fns';
@@ -123,6 +123,24 @@ export default function Payroll() {
       });
       const data = await res.json();
       setPayrollHistory(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDeletePayroll = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this orphaned payroll record?')) return;
+    try {
+      const res = await fetch(`/api/payroll/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchPayroll();
+      } else {
+        const error = await res.json();
+        alert(error.message);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -252,10 +270,21 @@ export default function Payroll() {
                       {formatCurrency(payroll.netSalary)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button onClick={() => handleDownloadSlip(payroll)} className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors inline-flex items-center gap-2">
-                        <Download size={16} />
-                        <span className="sr-only sm:not-sr-only sm:text-xs">PDF</span>
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        <button onClick={() => handleDownloadSlip(payroll)} className="text-blue-600 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors inline-flex items-center gap-2">
+                          <Download size={16} />
+                          <span className="sr-only sm:not-sr-only sm:text-xs">PDF</span>
+                        </button>
+                        {isAdmin && !payroll.employeeId && (
+                          <button 
+                            onClick={() => handleDeletePayroll(payroll._id)} 
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-colors inline-flex items-center"
+                            title="Delete orphaned record"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))

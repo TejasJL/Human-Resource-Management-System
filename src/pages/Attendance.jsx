@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
-import { CheckSquare, Calendar, Filter, FileText, List } from 'lucide-react';
+import { CheckSquare, Calendar, Filter, FileText, List, Trash2 } from 'lucide-react';
 
 export default function Attendance() {
   const { user, token } = useSelector(state => state.auth);
@@ -60,6 +60,24 @@ export default function Attendance() {
     } catch (err) {
       console.error(err);
       setAttendance([]);
+    }
+  };
+
+  const handleDeleteAttendance = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this orphaned attendance record?')) return;
+    try {
+      const res = await fetch(`/api/attendance/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchAttendance();
+      } else {
+        const error = await res.json();
+        alert(error.message);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -142,6 +160,7 @@ export default function Attendance() {
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Punch History</th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Working Hours</th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                {isAdmin && <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-50">
@@ -200,6 +219,19 @@ export default function Attendance() {
                           </span>
                         )}
                       </td>
+                      {isAdmin && (
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          {!record.employeeId && (
+                            <button 
+                              onClick={() => handleDeleteAttendance(record._id)} 
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-colors inline-flex items-center"
+                              title="Delete orphaned record"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          )}
+                        </td>
+                      )}
                     </tr>
                   )
                 })

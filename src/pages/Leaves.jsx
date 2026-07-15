@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Calendar as CalendarIcon, Plus, Clock, CheckCircle, XCircle, X } from 'lucide-react';
+import { Calendar as CalendarIcon, Plus, Clock, CheckCircle, XCircle, X, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 export default function Leaves() {
@@ -59,6 +59,24 @@ export default function Leaves() {
       });
       if (res.ok) {
         fetchLeaves();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDeleteLeave = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this orphaned leave request?')) return;
+    try {
+      const res = await fetch(`/api/leaves/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchLeaves();
+      } else {
+        const error = await res.json();
+        alert(error.message);
       }
     } catch (err) {
       console.error(err);
@@ -210,6 +228,17 @@ export default function Leaves() {
                           <div className="flex justify-end gap-2">
                             <button onClick={() => handleUpdateStatus(leave._id, 'Approved')} className="text-green-600 hover:text-green-900 bg-green-50 px-3 py-1 rounded-md">Approve</button>
                             <button onClick={() => handleUpdateStatus(leave._id, 'Rejected')} className="text-red-600 hover:text-red-900 bg-red-50 px-3 py-1 rounded-md">Reject</button>
+                          </div>
+                        )}
+                        {!leave.employeeId && (
+                          <div className="flex justify-end mt-2">
+                            <button 
+                              onClick={() => handleDeleteLeave(leave._id)} 
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-lg transition-colors inline-flex items-center"
+                              title="Delete orphaned record"
+                            >
+                              <Trash2 size={16} />
+                            </button>
                           </div>
                         )}
                       </td>
