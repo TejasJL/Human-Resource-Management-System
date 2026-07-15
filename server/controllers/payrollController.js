@@ -67,8 +67,8 @@ export const runPayroll = async (req, res) => {
       const expectedDays = presentDays + paidLeavesUsedThisMonth + unpaidLeavesThisMonth;
       const absentDays = Math.max(0, workingDays - expectedDays);
 
-      // 3. Late Mark Rule & Deduction (Every late mark = 0.5 day deduction)
-      let lateMarkDeductionDays = lateMarks * 0.5;
+      // 3. Late Mark Rule & Deduction (Every 3 late marks = 0.5 day deduction)
+      let lateMarkDeductionDays = Math.floor(lateMarks / 3) * 0.5;
 
       // Find YTD paid leaves used to correctly calculate available paid leaves
       const startOfYearStr = `${new Date().getFullYear()}-01-01`;
